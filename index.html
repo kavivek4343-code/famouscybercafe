@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Famous Cyber Cafe - Your Online Partner</title>
+    <link rel="icon" href="/icons/icon-192.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#059669">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #ecfeff; }
+        body::-webkit-scrollbar { width: 8px; }
+        body::-webkit-scrollbar-thumb { background-color: #059669; border-radius: 4px; }
+        .highlight-owner { background-image: linear-gradient(to right, #facc15, #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .service-icon { font-size: 3rem; color: #047857; margin-bottom: 0.75rem; }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="min-h-screen antialiased">
+    <div id="app" class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="text-center mb-12 bg-white shadow-2xl rounded-xl p-6 md:p-10 border-t-4 border-emerald-600 transition duration-500 hover:shadow-emerald-300">
+            <img src="/icons/icon-192.png" alt="FCC Logo" class="mx-auto mb-4 w-40 sm:w-48 h-auto" width="250">
+            <h1 class="text-6xl font-black text-gray-900 mb-1 sm:text-7xl">FAMOUS CYBER CAFE</h1>
+            <p class="text-2xl text-emerald-700 font-extrabold tracking-tight mt-1">Your Digital Partner</p>
+            <div class="mt-4 p-3 bg-gray-50 rounded-lg shadow-inner">
+                <p class="text-lg font-medium text-gray-600">Owner:</p>
+                <p class="text-4xl font-black highlight-owner tracking-wider">Chandan Kumar</p>
+                <p class="text-xl font-bold text-gray-800 mt-2">
+                    Contact No.:
+                    <a href="tel:9708772338" class="text-green-600 hover:text-green-700 transition duration-300">9708772338</a>
+                </p>
+                <p class="text-md font-semibold text-gray-700 mt-2">CSC Registration ID: <span class="text-gray-900 font-bold">554452140018</span></p>
+            </div>
+        </header>
+        <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center uppercase tracking-wider">Our Key Services</h2>
+        <div id="services-grid" class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 md:gap-6"></div>
+        <div class="mt-10 text-center p-6 bg-red-50 rounded-xl shadow-md border-2 border-red-300">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">Watch Our Tutorials and Updates!</h3>
+            <a href="https://youtube.com/@famousformonline2408?si=7ebiqtuJS7-m9dde" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-10 py-4 bg-red-600 text-white font-bold rounded-full shadow-lg hover:bg-red-700 transition duration-300 transform hover:scale-105 space-x-4">
+                <i class="fab fa-youtube text-4xl"></i>
+                <span class="text-xl">Subscribe to Our YouTube Channel</span>
+            </a>
+        </div>
+        <footer class="mt-10 text-center p-6 bg-white rounded-xl shadow-lg border-b-4 border-emerald-600">
+            <h3 class="text-2xl font-bold text-gray-700 mb-3">Call for Immediate Service!</h3>
+            <p class="text-gray-500 mb-4">For any of the services listed above or other cyber cafe related tasks, please contact us directly.</p>
+            <a href="tel:9708772338" class="inline-block px-8 py-3 bg-emerald-600 text-white font-bold rounded-full shadow-lg hover:bg-emerald-700 transition duration-300 transform hover:scale-105">Call Now: 9708772338</a>
+            <p class="text-xs text-gray-400 mt-4 pt-2 border-t border-gray-100">APP CREATED BY AVIVEK</p>
+        </footer>
+    </div>
+
+    <div id="message-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white p-6 rounded-xl shadow-2xl max-w-md w-full transform transition-all duration-300 scale-95">
+            <h3 id="modal-title" class="text-2xl font-bold text-emerald-600 mb-3"></h3>
+            <p id="modal-content" class="text-gray-700 mb-6"></p>
+            <button id="close-modal" class="w-full bg-emerald-500 text-white py-2 rounded-lg font-semibold hover:bg-emerald-600 transition">Understood</button>
+        </div>
+    </div>
+
+    <script>
+        const services = [
+            { name_main: "AIR TICKET Booking", icon_class: "fa-solid fa-plane" },
+            { name_main: "PANCARD Application", icon_class: "fa-solid fa-id-card" },
+            { name_main: "VOTER CARD Services", icon_class: "fa-solid fa-user-check" },
+            { name_main: "Aadhar Correction", icon_class: "fa-solid fa-fingerprint" },
+            { name_main: "EWS Certificate", icon_class: "fa-solid fa-file-invoice" },
+            { name_main: "NCL Certificate", icon_class: "fa-solid fa-file-alt" },
+            { name_main: "Bansawali / Genealogy", icon_class: "fa-solid fa-book-open" },
+            { name_main: "LPC (Land Possession Cert.)", icon_class: "fa-solid fa-house-chimney" },
+            { name_main: "Jeevan Pramaan (Life Cert.)", icon_class: "fa-solid fa-handshake-angle" },
+            { name_main: "Language Translation", icon_class: "fa-solid fa-language" },
+            { name_main: "AEPS (Aadhaar Money Transfer)", icon_class: "fa-solid fa-money-check-dollar" },
+            { name_main: "Vehicle Insurance (Vima)", icon_class: "fa-solid fa-shield-halved" },
+            { name_main: "Online Form Filling", icon_class: "fa-solid fa-file-signature" },
+            { name_main: "Resume Creation", icon_class: "fa-solid fa-file-lines" },
+            { name_main: "Colour Print & Copy", icon_class: "fa-solid fa-print" },
+            { name_main: "Photocopy / Xerox", icon_class: "fa-solid fa-copy" },
+            { name_main: "Scanning & Lamination", icon_class: "fa-solid fa-images" },
+            { name_main: "Email & Internet Browsing", icon_class: "fa-solid fa-globe" },
+        ];
+
+        const servicesGrid = document.getElementById('services-grid');
+        const modal = document.getElementById('message-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalContent = document.getElementById('modal-content');
+        const closeModalButton = document.getElementById('close-modal');
+        const contactNumber = "9708772338";
+
+        function showMessage(title, content) {
+            modalTitle.textContent = title;
+            modalContent.innerHTML = content;
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.querySelector('div').classList.add('scale-100'), 10);
+        }
+        function closeModal() {
+            modal.querySelector('div').classList.remove('scale-100');
+            modal.classList.add('hidden');
+        }
+        closeModalButton.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+        function renderServices() {
+            services.forEach(service => {
+                const card = document.createElement('div');
+                card.className = 'service-card bg-white p-4 md:p-6 rounded-xl shadow-lg border-2 border-transparent hover:border-emerald-500 transition duration-300 cursor-pointer transform hover:scale-[1.02] active:scale-100';
+                card.setAttribute('data-service', service.name_main);
+                card.innerHTML = `
+                    <div class="text-center">
+                        <i class="service-icon ${service.icon_class}"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 text-center">${service.name_main}</h3>
+                `;
+                card.addEventListener('click', () => {
+                    const serviceName = card.getAttribute('data-service');
+                    const title = `${serviceName} Enquiry`;
+                    const content = `
+                        <p>To start this service, please call our owner, <strong>Mr. Chandan Kumar</strong>, at this number:</p>
+                        <p class="text-center mt-4 text-3xl font-extrabold text-emerald-500">${contactNumber}</p>
+                        <p class="mt-4 text-sm text-gray-500">We will be available to assist you as soon as possible.</p>
+                    `;
+                    showMessage(title, content);
+                });
+                servicesGrid.appendChild(card);
+            });
+        }
+        window.onload = renderServices;
+
+        // Register service worker for PWA offline capability
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }).catch(function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
